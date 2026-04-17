@@ -1,0 +1,9 @@
+{
+  "name": "task-manager-api",
+  "version": "1.0.0",
+  "description": "A simple Task Manager REST API built with core Node.js",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

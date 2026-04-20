@@ -10,7 +10,7 @@ const server = http.createServer((req, res) => {
   const parsed = url.parse(req.url, true);
   req.query    = parsed.query;
   req.path     = req.url;
-
+ 
   logger(req);
 
   parseBody(req, () => {

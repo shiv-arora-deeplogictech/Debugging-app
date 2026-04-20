@@ -11,7 +11,10 @@ const getAllTasks = (req, res) => {
   const { completed } = req.query;
 
   if (completed !== undefined) {
-    const filtered = tasks.filter((task) => task.completed === completed);
+    // BUG 3 FIX: req.query values are always strings ("true"/"false"),
+    // but task.completed is a boolean — convert before comparing
+    const completedBool = completed === 'true';
+    const filtered = tasks.filter((task) => task.completed === completedBool);
     return send(res, 200, filtered);
   }
 
@@ -34,7 +37,7 @@ const getTaskStats = (req, res) => {
   const completed = tasks.filter((t) => t.completed).length;
   const pending   = total - completed;
 
-  send(res, 200, { total, completed, pending });
+  send(res, 200, { total, completed, notCompleted: pending });
 };
 
 const createTask = (req, res) => {
@@ -46,7 +49,7 @@ const createTask = (req, res) => {
 
   const newTask = {
     id: nextId++,
-    tittle: title,
+    title: title, // BUG 4 FIX: was "tittle" (typo)
     completed: false,
     priority: priority || 'medium',
   };
@@ -72,7 +75,9 @@ const deleteTask = (req, res) => {
   const index = tasks.findIndex((t) => t.id === id);
 
   if (index === -1) {
-    send(res, 404, { error: 'Task not found' });
+    // BUG 5 FIX: missing "return" caused execution to continue after
+    // the 404 response, splicing index -1 and corrupting the array
+    return send(res, 404, { error: 'Task not found' });
   }
 
   tasks.splice(index, 1);

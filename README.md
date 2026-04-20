@@ -31,10 +31,10 @@ The server starts at `http://localhost:3000`.
 | Method | Path                  | Description              |
 |--------|-----------------------|--------------------------|
 | GET    | `/api/tasks`          | Get all tasks            |
-| GET    | `/api/tasks?completed=true` | Filter tasks by status |
-| GET    | `/api/tasks/stats`    | Get task statistics      |
+| GET    | `/api/tasks?completed=true` | Filter tasks by status |  not working 
+| GET    | `/api/tasks/stats`    | Get task statistics      |      not working 
 | GET    | `/api/tasks/:id`      | Get a task by ID         |
-| POST   | `/api/tasks`          | Create a new task        |
+| POST   | `/api/tasks`          | Create a new task        |      not working 
 | PUT    | `/api/tasks/:id`      | Update a task            |
 | DELETE | `/api/tasks/:id`      | Delete a task            |
 
